@@ -1,0 +1,16 @@
+---
+  - name: testing variable
+    hosts: webservers
+    vars:
+      city: ahmedabad
+      tech: blockchain
+    tasks:
+      - name: print the variables
+        ansible.builtin.debug:
+          msg: i am living in {{ city }} and doing work in {{ tech }} field.
+      - name: print defferent variable
+        ansible.builtin.debug:
+          msg: the {{ city }} is really good and lots of oppotunities in {{ tech }} field.
+        vars:
+          - city: abuDhabi
+          - tech: Hacking

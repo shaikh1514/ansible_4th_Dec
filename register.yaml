@@ -1,0 +1,16 @@
+---
+  - name: testing register variable
+    hosts: servera.lab.example.com
+    tasks:
+      - name: executing cmd
+        ansible.builtin.command:
+          cmd: uptime
+        register: myresult
+
+      - name: printing result
+        ansible.builtin.debug:
+          var: myresult
+
+      - name: redirecting
+        ansible.builtin.shell:
+          cmd: echo {{ myresult.stdout }} > /home/student/myfile.txt

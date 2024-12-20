@@ -1,0 +1,13 @@
+---
+  - name: demo of inventory and ansible.cfg
+    hosts: webservers
+    tasks:
+      - name: create folder
+        ansible.builtin.file:
+          path: /home/devops/myfolder
+          state: directory
+
+      - name: create file
+        ansible.builtin.file:
+          path: /home/devops/myfolder/myfile
+          state: touch

@@ -1,0 +1,11 @@
+---
+  - name: demo of condititions
+    hosts: serverb.lab.example.com
+    vars:
+      banana: true
+    tasks:
+      - name: restart the service based on condition
+        ansible.builtin.service:
+          name: httpd
+          state: restarted
+        when: banana

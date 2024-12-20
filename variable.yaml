@@ -1,0 +1,12 @@
+---
+  - name:
+    hosts: servera.lab.example.com
+    vars:
+      fruit:
+        name1: apple
+        name2: kiwi
+        name3: banana
+    tasks:
+      - name: print vvariable
+        ansible.builtin.debug:
+          msg: the fruits which available are {{ fruit.name1 }} and {{ fruit.name2 }} the fruit which is not aviaable is {{ fruit.name3 }}

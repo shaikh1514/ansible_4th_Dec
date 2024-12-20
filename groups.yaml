@@ -1,0 +1,7 @@
+---
+  - name: testing groups variable
+    hosts: workstation.lab.example.com
+    tasks:
+      - name: print group info
+        ansible.builtin.debug:
+          msg: "members of webservers groups are: {{ groups.webservers }}"

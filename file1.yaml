@@ -1,0 +1,14 @@
+---
+  - name: demo of file module
+    hosts: webservers
+    tasks:
+      - name: changing selinux and permissions
+        ansible.builtin.file:
+          path: /home/student/myimpfile.txt
+          owner: student
+          group: devops
+          mode: '660'
+          seuser: _default
+          serole: _default
+          setype: _default
+          selevel: _default

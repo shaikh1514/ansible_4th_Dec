@@ -1,0 +1,10 @@
+---
+  - name: adding a line
+    hosts: webservers
+    tasks:
+      - name: adding a lone
+        ansible.builtin.lineinfile:
+          path: /home/student/myimpfile.txt
+          line: "This line insert in between"
+          insertafter: "This file copied using Ansible copy module"
+          state: present

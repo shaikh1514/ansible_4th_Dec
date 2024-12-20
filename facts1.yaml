@@ -1,0 +1,15 @@
+---
+  - name: testing ansible facts
+    hosts: appservers
+    tasks:
+      - name: printing facts
+        ansible.builtin.debug:
+          msg: the machines ip add is  {{ ansible_facts['default_ipv4']['address'] }} and mac address of the machine is {{ ansible_facts['default_ipv4']['macaddress'] }} and size of vdb hdd is {{ ansible_facts['devices']['vdb']['size'] }}
+
+      - name: printing another facts
+        ansible.builtin.debug:
+          msg: the memory avaiable is {{ ansible_facts.memtotal_mb }} and ip add is {{ ansible_facts.default_ipv4.address }}
+
+      - name: printing using old information
+        ansible.builtin.debug:
+          msg: the size of vda1 parrtition is {{ ansible_devices.vda.partitions.vda1.size }} and bios version is {{ ansible_bios_version }}

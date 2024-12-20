@@ -1,0 +1,23 @@
+---
+  - name: demo of blokc
+    hosts: servera.lab.example.com
+    tasks:
+      - name: demo of block
+        block:
+          - name: block-task-1
+            ansible.builtin.command:
+              cmd: notacmd
+          - name: block-task-2
+            ansible.builtin.debug:
+              msgs: this is block task executing
+        rescue:
+          - name: resuce-task-1
+            ansible.builtin.command:
+              cmd: touch hi.txt
+          - name: resuce-task-2
+            ansible.builtin.debug:
+              msg: this is rescue tasks
+        always:
+          - name: always tasks
+            ansible.builtin.debug:
+              msg: this tasks will execute always

@@ -1,0 +1,2 @@
+city: lucknow
+tech: oracle

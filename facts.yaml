@@ -1,0 +1,16 @@
+---
+  - name: creating and generating custom facts
+    hosts: servera.lab.example.com
+    vars:
+      remote_folder: /etc/ansible/facts.d
+      remote_file1: servera.fact
+    tasks:
+      - name: create directory in machine
+        ansible.builtin.file:
+          path: "{{ remote_folder }}"
+          state: directory
+
+      - name: copy the facts file 
+        ansible.builtin.copy:
+          src: "{{ remote_file1 }}"
+          dest: "{{ remote_folder }}"

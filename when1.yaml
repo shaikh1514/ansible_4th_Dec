@@ -1,0 +1,9 @@
+---
+  - name: testing when
+    hosts: serverc.lab.example.com, serverb.lab.example.com
+    tasks:
+      - name: download package
+        ansible.builtin.dnf:
+          name: httpd
+          state: latest
+        when: inventory_hostname is in groups['webservers'] and inventory_hostname is in groups['dbservers']

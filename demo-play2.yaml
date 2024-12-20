@@ -1,0 +1,14 @@
+--- 
+  - name: create foldeeeeeeeer
+    hosts: servera.lab.example.com
+    remote_user: student
+    become: false
+    tasks:
+      - name: create file
+        ansible.builtin.command:
+          cmd: "touch /home/student/myfile3.txt"
+
+      - name: create file
+        ansible.builtin.command:
+          cmd: "touch /home/devops/ansible2.txt"
+          

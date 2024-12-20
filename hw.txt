@@ -1,0 +1,6 @@
+Hostname = hostname
+Bios_version = bios_version
+Memroy info = meminfo
+Size of VDA = vdasize
+Size of VDB = vdbsize
+Ip Address = ipaddress

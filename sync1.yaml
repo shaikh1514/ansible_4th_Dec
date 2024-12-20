@@ -1,0 +1,9 @@
+---
+  - name: copy the folder using sync
+    hosts: servera.lab.example.com
+    tasks:
+      - name: copy the folder
+        ansible.posix.synchronize:
+          src: /home/student/sync/imp_files/webservers
+          dest: /home/student/ansible/backup
+          mode: pull

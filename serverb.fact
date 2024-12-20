@@ -1,0 +1,3 @@
+[general]
+pkg1: vsftpd
+pkg2: sshd

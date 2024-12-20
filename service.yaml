@@ -1,0 +1,18 @@
+---
+  - name: checking status
+    hosts: servera.lab.example.com
+    tasks:
+      - name: start service
+        ansible.builtin.service:
+          name: sshd
+          state: restarted
+
+      - name: check the status
+        ansible.builtin.command:
+          cmd: "systemctl is-active firewalld"
+        register: ans
+
+      - name: print the status
+        ansible.builtin.debug:
+          var: ans.stdout
+

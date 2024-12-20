@@ -1,0 +1,19 @@
+---
+  - name: demo of changed when
+    hosts: serverd.lab.example.com
+    tasks:
+      - name: executing cmd
+        ansible.builtin.command:
+          cmd: uptime
+        changed_when: ansible_hostname == 'servera'
+
+      - name: print a msg
+        ansible.builtin.debug:
+          msg: this print ok
+        changed_when: ansible_hostname == 'serverz'
+
+      - name: create a file
+        ansible.builtin.file:
+          path: /home/student/ansible.txt
+          state: touch
+        changed_when: false

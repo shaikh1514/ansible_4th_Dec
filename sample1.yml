@@ -1,0 +1,7 @@
+---
+  - name: arbitrrary modules
+    hosts: serverb.lab.example.com
+    tasks:
+      - name: execute a cmd
+        ansible.builtin.shell:
+          cmd: timedatectl >> /home/student/hello.txt

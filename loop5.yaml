@@ -1,0 +1,9 @@
+---
+  - name: using older method
+    hosts: serverd.lab.example.com
+    tasks:
+      - name: create folder
+        ansible.builtin.file:
+          path: "/home/student/file{{ item }}.txt"
+          state: touch
+        loop: "{{ range(1, 4) | list }}"

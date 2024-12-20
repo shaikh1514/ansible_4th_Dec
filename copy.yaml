@@ -1,0 +1,12 @@
+---
+  - name: copy demo
+    hosts: webservers
+    tasks:
+      - name: copy ansibble.cfg file
+        ansible.builtin.copy:
+          src: ansible.cfg
+          dest: /home/student/myimpfile.txt
+          owner: student
+          group: devops
+          mode: u+rwx,g+rwx,o-rwx
+          setype: samba_share_t

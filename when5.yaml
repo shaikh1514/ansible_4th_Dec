@@ -1,0 +1,13 @@
+---
+  - name: demo of condititions
+    hosts: serverc.lab.example.com
+    tasks:
+      - name: restart the service based on condition
+        ansible.builtin.service:
+          name: sshd
+          state: restarted
+        when: ansible_facts['memtotal_mb'] < 1000
+
+      - name: restart the service
+        ansible.builtin.debug:
+          var: ansible_facts['memtotal_mb']

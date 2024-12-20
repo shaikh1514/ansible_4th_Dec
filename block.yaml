@@ -1,0 +1,15 @@
+---
+  - name: blockinfile demo
+    hosts: webservers
+    tasks:
+      - name: adding a data block
+        ansible.builtin.blockinfile:
+          path: /home/student/myimpfile.txt
+          block: |
+            EOF
+            "you guys
+            will go for examination. exam will be
+            4 hours longs and once you cleared
+            the exam, you will become RHCE, means
+            Red Hat Certified Engineer"
+          state: present

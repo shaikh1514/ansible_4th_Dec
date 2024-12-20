@@ -1,0 +1,16 @@
+---
+  - name: loop over register variable
+    hosts: servera.lab.example.com
+    tasks:
+      - name: executing cmd
+        ansible.builtin.command:
+          cmd: "{{ item }}"
+        loop:
+         - uptime
+         - uname -r
+        register: myans
+
+      - name: print the output
+        ansible.builtin.debug:
+          msg: this is stdout output of {{ item['stdout'] }}
+        loop: "{{ myans['results'] }}"

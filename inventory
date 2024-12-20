@@ -1,0 +1,22 @@
+workstation.lab.example.com
+
+[webservers]
+servera.lab.example.com    #city=ahmedabad, tech=automation
+serverb.lab.example.com    #city=mumbai, tech=azure
+
+
+[webservers:vars]
+city = NewYork             
+tech = Networking
+
+[dbservers]
+serverc.lab.example.com    city=thane, tech=vmware
+serverd.lab.example.com    city=surat, tech=bitcoin
+
+[dbservers:vars]
+city = Manhatton
+tech = Programming
+
+[appservers:children]
+webservers
+dbservers

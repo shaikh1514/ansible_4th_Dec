@@ -1,0 +1,7 @@
+---
+  - name: testing groups variable
+    hosts: all
+    tasks:
+      - name: print group info
+        ansible.builtin.debug:
+          msg: "the Host {{ inventory_hostname }} is members of {{ group_names }} group"

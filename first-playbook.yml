@@ -1,0 +1,22 @@
+---
+  - name: this is my first task
+    hosts: webservers
+    tasks:
+      - name: first task - creating folder
+        ansible.builtin.file:
+          path: /home/student/first-folder1
+          state: directory
+
+      - name: first-file - creating first fiile
+        ansible.builtin.file:
+          path: /home/student/first-folder/first-file
+          state: touch
+
+      - name: third task - copy the file
+        ansible.builtin.copy:
+          src: inventory1
+          dest: /home/student/inventory1
+
+
+
+

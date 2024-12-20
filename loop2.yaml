@@ -1,0 +1,15 @@
+---
+  - name: testing loop
+    hosts: servera.lab.example.com
+    vars_files:
+      - vars/sample1.yaml
+    tasks:
+      - name: print names
+        ansible.builtin.debug:
+          msg: The fruits which are available {{ item }}
+        loop:
+          - "{{ fruit1 }}"
+          - "{{ fruit2 }}"
+          - "{{ fruit3 }}"
+          - "{{ fruit4 }}"
+          - "{{ fruit5 }}"

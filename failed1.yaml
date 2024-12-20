@@ -1,0 +1,15 @@
+---
+  - name: demo of failed
+    hosts: serverc.lab.example.com
+    tasks:
+      - name: task-1
+        ansible.builtin.debug:
+          msg: SUCCESS Achieved
+
+      - name: task-2
+        ansible.builtin.fail:
+          msg: MISSION FAILED
+
+      - name: task-3
+        ansible.builtin.debug:
+          msg: This task will not executed

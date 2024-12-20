@@ -1,0 +1,12 @@
+---
+  - name: using older method
+    hosts: serverc.lab.example.com
+    tasks:
+      - name: create folder
+        ansible.builtin.file:
+          path: "/home/student/{{ item }}.txt"
+          state: touch
+        with_items:
+          - file1
+          - file2
+          - file3

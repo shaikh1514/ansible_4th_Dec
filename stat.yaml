@@ -1,0 +1,12 @@
+---
+  - name: getting stat
+    hosts: servera.lab.example.com
+    tasks:
+      - name: getting stat of myimpfile.txt
+        ansible.builtin.stat:
+          path: /home/student/myimpfile.txt
+        register: apple
+
+      - name: pprint the variable
+        ansible.builtin.debug:
+          msg: checksum of this file is {{ apple.stat.checksum }}

@@ -1,0 +1,8 @@
+---
+  - name: demo of fetch module
+    hosts: webservers
+    tasks:
+      - name: getting log file
+        ansible.builtin.fetch:
+          src: /var/log/secure
+          dest: imp_files/webservers

@@ -1,0 +1,23 @@
+---
+  - name: demo of ignore_erros
+    hosts: servera.lab.example.com
+    ignore_errors: true
+    #force_handlers: true
+    tasks:
+      - name: task-1
+        ansible.builtin.command:
+          cmd: lsblk
+        notify: demotask1
+
+      - name: task-2
+        ansible.builtin.command:
+          cmd: notacmd
+
+      - name: task-3
+        ansible.builtin.command:
+          cmd: uname -r
+
+    handlers:
+      - name: demotask1
+        ansible.builtin.debug:
+          msg: This is handler task

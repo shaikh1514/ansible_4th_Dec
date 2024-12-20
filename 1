@@ -1,0 +1,16 @@
+---
+  - name: demo of changed when
+    hosts: serverd.lab.example.com
+    tasks:
+      - name: executing cmd
+        ansible.builtin.command:
+          cmd: uptime
+
+      - name: print a msg
+        ansible.builtin.debug:
+          msg: this print ok
+
+      - name: create a file
+        ansible.builtin.file:
+          path: /home/student/ansible.txt
+          state: touch

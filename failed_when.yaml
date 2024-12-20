@@ -1,0 +1,8 @@
+---
+  - name: demo of failed_when
+    hosts: serverb.lab.example.com
+    tasks:
+      - name: failed when demo
+        ansible.builtin.debug:
+          msg: uptime
+        failed_when: ansible_facts['fqdn'] == 'serverb.lab.example.com'

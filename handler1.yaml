@@ -1,0 +1,34 @@
+---
+  - name: demo of handling the task
+    hosts: serverb.lab.example.com
+    tasks:
+      - name: regular-task-1
+        ansible.builtin.command:
+          cmd: uptime
+        notify: handler1
+
+      - name: regular-task-2
+        ansible.builtin.debug:
+          msg: this is normal task
+        notify: handler-2
+
+      - name: regular-task-3
+        ansible.builtin.file:
+          path: /home/student/handler_task.txt
+          state: touch
+        notify: handler3
+    
+    handlers:
+      - name: handler3
+        ansible.builtin.debug:
+          msg: this is handler-task-1
+
+      - name: handler-2
+        ansible.builtin.service:
+          name: sshd
+          state: restarted
+
+      - name: handler1
+        ansible.builtin.shell:
+          cmd: uptime >> /home/student/handler_task.txt
+

@@ -1,0 +1,18 @@
+---
+  - name: demo of condititions
+    hosts: serverd.lab.example.com
+    tasks:
+      - name: execute cmd
+        ansible.builtin.command:
+          cmd: ls -l /home
+        register: home
+
+      - name: restart the service based on condition
+        ansible.builtin.service:
+          name: sshd
+          state: restarted
+        when: "'students' is in home.stdout"
+
+      - name: print the variable
+        ansible.builtin.debug:
+          var: home

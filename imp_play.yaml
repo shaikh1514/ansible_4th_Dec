@@ -1,0 +1,9 @@
+---
+  - name: printing secret variables
+    hosts: servera.lab.example.com
+    vars_files:
+      - secret_var.yaml
+    tasks:
+      - name: print the variables
+        ansible.builtin.debug:
+          msg: hello once this playbook run, user name will be {{ user.name }} and his password will be {{ user.pass }} and his role will be {{ user.group }} created.

@@ -1,0 +1,19 @@
+---
+  - name: demo of condititions
+    hosts: serverd.lab.example.com
+    ignore_errors: true
+    tasks:
+      - name: execute cmd
+        ansible.builtin.command:
+          cmd: vgs my_vg
+        register: home
+
+      - name: restart the service based on condition
+        ansible.builtin.service:
+          name: sshd
+          state: restarted
+        when: "home.rc != 0"
+
+      - name: print the variable
+        ansible.builtin.debug:
+          var: home

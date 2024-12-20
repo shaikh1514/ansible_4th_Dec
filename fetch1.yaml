@@ -1,0 +1,9 @@
+---
+  - name: demo of fetch module
+    hosts: appservers
+    tasks:
+      - name: getting log file
+        ansible.builtin.fetch:
+          src: /var/log/messages
+          dest: imp_files/backup2
+          flat: true

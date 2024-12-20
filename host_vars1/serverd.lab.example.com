@@ -1,0 +1,2 @@
+city: kotchi
+tech: developing

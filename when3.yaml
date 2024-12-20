@@ -1,0 +1,14 @@
+---
+  - name: demo of condititions
+    hosts: serverc.lab.example.com
+    tasks:
+      - name: restart the service based on condition
+        ansible.builtin.service:
+          name: sshd
+          state: restarted
+        when: ansible_facts['hostname'] == 'serverc'
+
+      - name: restart the service
+        ansible.builtin.debug:
+          msg: This will execute
+        when: ansible_facts.fqdn == 'serverd.lab.example.com'

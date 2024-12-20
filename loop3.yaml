@@ -1,0 +1,20 @@
+---
+  - name: testing loop again
+    hosts: serverb.lab.example.com
+    vars:
+      fruits:
+        - name: apple
+          type: sweet
+          cost: high
+        - name: banana
+          type: sour
+          cost: low
+        - name: kiwi
+          type: bitter
+          cost: medium
+    tasks:
+      - name: printing names
+        ansible.builtin.debug:
+          msg: The fruit {{ item.name }} is {{ item['type'] }} in test and cost is {{ item.cost }}
+        loop: "{{ fruits }}"
+

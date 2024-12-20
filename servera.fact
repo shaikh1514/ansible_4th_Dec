@@ -1,0 +1,3 @@
+[general]
+pkg1: httpd
+pkg2: firewalld

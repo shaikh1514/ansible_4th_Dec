@@ -1,0 +1,27 @@
+---
+  - name: replace demo
+    hosts: appservers
+    tasks:
+      - name: copy the file
+        ansible.builtin.copy:
+          src: hw.txt
+          dest: /mnt/hardwareinfo1.txt
+
+      - name: replace the content
+        ansible.builtin.replace:
+          path: /mnt/hardwareinfo1.txt
+          regexp: "{{ item.src }}"
+          replace: "{{ item.dest }}"
+        loop:
+          - src: hostname
+            dest: "{{ ansible_facts['hostname'] }}"
+          - src: bios_version
+            dest: "{{ ansible_facts['bios_version'] }}"
+          - src: meminfo
+            dest: "{{ ansible_facts['memtotal_mb'] }}"
+          - src: vdasize
+            dest: "{{ ansible_facts['devices']['vda']['size'] }}"
+          - src: vdbsize
+            dest: "{{ ansible_facts['devices']['vdb']['size'] }}"
+          - src: ipaddress
+            dest: "{{ ansible_facts['default_ipv4']['address'] }}"

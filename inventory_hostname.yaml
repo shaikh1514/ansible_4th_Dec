@@ -1,0 +1,7 @@
+---
+  - name: testing inventory_hostname magic varialbe
+    hosts: appservers
+    tasks:
+      - name: print where task will execute
+        ansible.builtin.debug:
+          msg: This task will be execute on {{ inventory_hostname }}
