@@ -1,0 +1,12 @@
+---
+  - name: testing include and import tasks
+    hosts: servera.lab.example.com
+    tasks:
+      - name: this will import the tasks
+        import_tasks: tasks/import_tasks.yml
+        when: inventory_hostname == 'serverb.lab.example.com'
+
+      - name: this will include the tasks
+        include_tasks: tasks/include_tasks.yml
+        when: inventory_hostname == 'serverc.lab.example.com'
+        

@@ -1,0 +1,17 @@
+---
+  - name: creating 4 users
+    hosts: appservers
+    vars_files:
+      vars/pass.yaml
+    tasks:
+      - name: create user
+        ansible.builtin.user:
+          name: "{{ item }}"
+          password: "{{ pass | password_hash('sha512') }}"
+          state: present
+        loop:
+          - mishika
+          - kamlesh
+          - payal
+          - gaurav
+          - suresh

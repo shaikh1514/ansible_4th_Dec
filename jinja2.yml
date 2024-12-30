@@ -1,0 +1,13 @@
+---
+  - name: executing cmd
+    hosts: servera.lab.example.com
+    tasks:
+      - name: execute cmd
+        ansible.builtin.command:
+          cmd: uptime
+        register: jerry
+
+      - name: redirect ouput
+        ansible.builtin.template:
+          src: command.j2
+          dest: /home/student/newcmd.txt

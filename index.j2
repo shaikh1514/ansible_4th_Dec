@@ -1,0 +1,6 @@
+Hello Welcome to the {{ ansible_facts['hostname'] }}
+
+Below is the information of this server:
+ip add: {{ ansible_default_ipv4.address }}
+fqdn: {{ ansible_facts.fqdn }}
+bios version: {{ ansible_facts['bios_version'] }}

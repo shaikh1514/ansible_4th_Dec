@@ -1,0 +1,8 @@
+---
+  - name: including task 1
+    ansible.builtin.debug:
+      msg: This is example of include task
+
+  - name: include task 2
+    ansible.builtin.command:
+      cmd: lsblk

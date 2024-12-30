@@ -1,0 +1,9 @@
+---
+  - name: deploy host files
+    hosts: dbservers
+    tasks:
+      - name: create host file
+        ansible.builtin.template:
+          src: hosts.j2
+          dest: /home/student/hostinfo.txt
+        when: ansible_facts['hostname'] == 'serverc'

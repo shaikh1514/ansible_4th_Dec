@@ -1,0 +1,8 @@
+---
+  - name: import-task-1
+    ansible.builtin.debug:
+      msg: This is import tasks no1
+
+  - name: import-task-2
+    ansible.builtin.command:
+      cmd: uptime

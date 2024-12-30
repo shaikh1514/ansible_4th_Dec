@@ -1,0 +1,39 @@
+---
+  - name: configure webserver
+    hosts: appservers
+    tasks:
+      - name: install pkg
+        ansible.builtin.dnf:
+          name:
+            - httpd
+            - firewalld
+          state: latest
+
+      - name: start service
+        ansible.builtin.service:
+          name: "{{ item }}"
+          state: started
+          enabled: true
+        loop:
+          - httpd
+          - firewalld
+
+      - name: configure html  page
+        ansible.builtin.template:
+          src: index.j2
+          dest: /var/www/html/index.html
+        notify: restart
+
+      - name: enable firewalld
+        ansible.posix.firewalld:
+          service: http
+          state: enabled
+          immediate: true
+          permanent: true
+
+    handlers:
+      - name: restart
+        ansible.builtin.service:
+          name: httpd
+          state: restarted
+
