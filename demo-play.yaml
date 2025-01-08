@@ -1,6 +1,6 @@
 ---
   - name: demo of inventory and ansible.cfg
-    hosts: webservers
+    hosts: serverd.lab.example.com
     tasks:
       - name: create folder
         ansible.builtin.file:

@@ -1,0 +1,81 @@
+---
+  - name: create users accordingly
+    hosts: appservers
+    vars_files:
+      - vars/users_vars.yml
+    tasks:
+      - name: create users for webadmin job
+        ansible.builtin.user:
+          name: "{{ item.name }}"
+          groups: "{{ item.group }}"
+          state: present
+          password: "{{ item.pass | password_hash('sha512') }}"
+        loop: "{{ users }}"
+        when: inventory_hostname in groups['webservers'] and item['job'] == 'webadmin'
+
+      - name: create users for dbadmin job                                            
+        ansible.builtin.user:                                                          
+          name: "{{ item.name }}"                                                      
+          groups: "{{ item.group }}"                                                   
+          state: present                                                               
+          password: "{{ item.pass | password_hash('sha512') }}"                        
+        loop: "{{ users }}"                                                            
+        when: inventory_hostname in groups['dbservers'] and item['job'] == 'dbadmin'
+
+      - name: create users for admin job                                            
+        ansible.builtin.user:                                                          
+          name: "{{ item.name }}"                                                      
+          groups: "{{ item.group }}"                                                   
+          state: present                                                               
+          password: "{{ item.pass | password_hash('sha512') }}"                        
+        loop: "{{ users }}"                                                            
+        when: item.job == 'admin'
+
+      - name: add authorisation keys for webadmin job
+        ansible.posix.authorized_key:
+          user: "{{ item.name }}"
+          key: "{{ lookup('file', 'ssh_keys/' + item.name + '.pub') }}"
+        loop: "{{ users }}"
+        when: inventory_hostname in groups['webservers'] and item.job == 'webadmin'
+
+      - name: add authorisation keys for dbadmin job
+        ansible.posix.authorized_key:
+          user: "{{ item.name }}"
+          key: "{{ lookup('file', 'ssh_keys/' + item.name + '.pub') }}"
+        loop: "{{ users }}"
+        when: inventory_hostname in groups['dbservers'] and item.job == 'dbadmin'
+
+      - name: add authorisation keys for admin job                                 
+        ansible.posix.authorized_key:                                                 
+          user: "{{ item.name }}"                                                     
+          key: "{{ lookup('file', 'ssh_keys/' + item.name + '.pub') }}"               
+        loop: "{{ users }}"                                                           
+        when: (inventory_hostname in groups['webservers'] or inventory_hostname in groups['dbservers']) and item.job == 'admin'
+
+      - name: modify sudo access for webadmin job
+        ansible.builtin.lineinfile:
+          path: /etc/sudoers.d/webmaster
+          state: present
+          create: yes
+          line: "%webmaster ALL=(ALL) NOPASSWD: ALL"
+          validate: /usr/sbin/visudo -cf %s
+        when: inventory_hostname in groups['webservers']
+
+      - name: modify sudo access for dbadmin job
+        ansible.builtin.lineinfile:
+          path: /etc/sudoers.d/devmaster
+          state: present
+          create: yes
+          line: "%devmaster ALL=(ALL) NOPASSWD: ALL"
+          validate: /usr/sbin/visudo -cf %s
+        when: inventory_hostname in groups['dbservers']
+
+      - name: modify sudo access for manager job
+        ansible.builtin.lineinfile:
+          path: /etc/sudoers.d/manager
+          state: present
+          create: yes
+          line: "%manager ALL=(ALL) NOPASSWD: ALL"
+          validate: /usr/sbin/visudo -cf %s
+
+          

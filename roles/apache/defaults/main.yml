@@ -1,0 +1,4 @@
+---
+# defaults file for apache
+name1: http
+name2: firewall

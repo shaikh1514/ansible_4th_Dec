@@ -1,0 +1,15 @@
+---
+  - name: testing roles
+    hosts: appservers
+    pre_tasks:
+      - name: pre-tasks
+        ansible.builtin.debug:
+          msg: This is pre-tasks and will execute before roles and all other tasks
+    tasks:
+      - name: regular task
+        ansible.builtin.debug:
+          msg: This is regualr tasks, will execute after roles only
+    
+      - name: teaking roles as tasks
+        ansible.builtin.import_role:
+          name: apache

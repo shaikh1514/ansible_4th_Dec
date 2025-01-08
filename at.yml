@@ -1,0 +1,13 @@
+---
+  - name: demo of at module
+    hosts: webservers
+    tasks:
+      - name: create date
+        ansible.posix.at:
+          command: "{{ item }}"
+          count: 2
+          units: minutes
+          unique: true
+        loop:
+          - touch /home/student/mytime.txt
+          - echo "This file created using at module in ansible" >> /home/student/mytime.txt

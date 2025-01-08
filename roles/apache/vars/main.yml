@@ -1,0 +1,4 @@
+---
+# vars file for apache
+name1: httpd
+name2: firewalld

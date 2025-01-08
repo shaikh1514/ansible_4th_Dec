@@ -1,0 +1,7 @@
+---
+# handlers file for apache
+  - name: restart
+    ansible.builtin.service:
+      name: "{{ name1 }}"
+      state: restarted
+

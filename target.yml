@@ -1,0 +1,8 @@
+---
+  - name: changing boot target
+    hosts: serverd.lab.example.com
+    tasks:
+      - name: changing target
+        ansible.builtin.command:
+          cmd: systemctl set-default multi-user.target
+          

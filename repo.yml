@@ -1,0 +1,12 @@
+---
+  - name: configre repo
+    hosts: appservers
+    tasks:
+      - name: configre repo
+        ansible.builtin.yum_repository:
+          name: myrepo
+          description: simle-agent repo
+          baseurl: http://materials.example.com/yum/repository
+          enabled: true
+          gpgcheck: true
+          gpgkey: http://materials.example.com/yum/repository/RPM-GPG-KEY-example

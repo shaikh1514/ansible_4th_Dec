@@ -1,0 +1,4 @@
+---
+  - src: https://github.com/geerlingguy/ansible-role-swap.git
+    scm: git
+    name: swap-partition

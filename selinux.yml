@@ -1,0 +1,7 @@
+---
+  - name: configuring selnux
+    hosts: appservers
+    vars:
+      selinux_state: enforcing
+    roles:
+      - redhat.rhel_system_roles.selinux

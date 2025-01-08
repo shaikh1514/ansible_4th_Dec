@@ -1,0 +1,11 @@
+---
+  - name: resize lvm
+    hosts: serverc.lab.example.com
+    tasks:
+      - name: resize lvm
+        community.general.lvol:
+          vg: vgtest
+          lv: lvtest
+          size: 900M
+          resizefs: true
+          force: yes

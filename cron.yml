@@ -1,0 +1,12 @@
+---
+  - name: confure job using cron
+    hosts: dbservers
+    tasks:
+      - name: create the file using cron
+        ansible.builtin.cron:
+          name: my_cron_job
+          user: student
+          job: echo "The text is added using cron job" >> /home/student/crony.txt
+          minute: "*/2"
+          hour: 23
+

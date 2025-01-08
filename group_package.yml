@@ -1,0 +1,8 @@
+---
+  - name: install group package
+    hosts: servera.lab.example.com
+    tasks:
+      - name: install group pkg
+        ansible.builtin.dnf:
+          name: '@System Tools'
+          state: latest

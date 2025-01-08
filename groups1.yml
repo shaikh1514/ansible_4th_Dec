@@ -1,0 +1,12 @@
+---
+  - name: creatting groups
+    hosts: appservers
+    tasks:
+      - name: create group
+        ansible.builtin.group:
+          name: "{{ item }}"
+          state: present
+        loop:
+          - webmaster
+          - devmaster
+          - manager

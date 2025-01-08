@@ -1,0 +1,53 @@
+---
+  - name: creating partition
+    hosts: serverc.lab.example.com
+    tasks:
+      - name: create 1st parititon
+        community.general.parted:
+          device: /dev/vdb
+          number: 1
+          state: present
+          label: gpt
+          flags: lvm
+          part_start: 0%
+          part_end: 50%
+
+      - name: create 2nd partition
+        community.general.parted:
+          device: /dev/vdb
+          number: 2
+          state: present
+          label: gpt
+          flags: lvm
+          part_start: 51%
+          part_end: 100%
+
+      - name: volume group create
+        community.general.lvg:
+          vg: vgtest
+          pvs: ['/dev/vdb1', '/dev/vdb2']
+          pesize: 16
+
+      - name: create logical volume
+        community.general.lvol:
+          vg: vgtest
+          lv: lvtest
+          size: 400M
+          force: yes
+
+      - name: assign file system
+        community.general.filesystem:
+          fstype: ext4
+          dev: /dev/vgtest/lvtest
+
+      - name: create mount point
+        ansible.builtin.file:
+          path: /mnt/lvm
+          state: directory
+
+      - name: mount the partition
+        ansible.posix.mount:
+          path: /mnt/lvm
+          src: /dev/vgtest/lvtest
+          fstype: ext4
+          state: mounted

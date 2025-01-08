@@ -1,0 +1,22 @@
+---
+  users:
+    - name: natasha
+      group: webmaster
+      pass: redhat123
+      job: webadmin
+    - name: sarah
+      group: webmaster
+      pass: redhat123
+      job: webadmin
+    - name: joel
+      group: devmaster
+      pass: redhat456
+      job: dbadmin
+    - name: noel
+      group: devmaster
+      pass: redhat456
+      job: dbadmin
+    - name: google
+      group: manager
+      pass: redhat789
+      job: admin
